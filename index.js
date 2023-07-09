@@ -8,11 +8,6 @@ const { MongoClient, ServerApiVersion, ObjectId } = require("MongoDB");
 app.use(cors());
 app.use(express.json());
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://auth-firebase-context-ta-e747a.web.app/"); 
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
 
 const uri = `mongodb+srv://${process.env.USER}:${process.env.PASS}@cluster1.p9ba0ek.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, {
