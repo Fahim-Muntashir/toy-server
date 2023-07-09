@@ -5,13 +5,14 @@ require("dotenv").config();
 const port = process.env.PORT || 5000;
 const { MongoClient, ServerApiVersion, ObjectId } = require("MongoDB");
 
-app.use(cors({
-    origin: 'https://auth-firebase-context-ta-e747a.web.app/', 
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Origin', 'X-Requested-With', 'Accept', 'x-client-key', 'x-client-token', 'x-client-secret', 'Authorization'],
-    credentials: true
-}))
+app.use(cors());
 app.use(express.json());
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "YOUR-DOMAIN.TLD"); // Update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 const uri = `mongodb+srv://${process.env.USER}:${process.env.PASS}@cluster1.p9ba0ek.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, {
